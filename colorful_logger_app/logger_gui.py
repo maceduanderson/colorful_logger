@@ -251,9 +251,8 @@ class FilterPanel(QWidget):
         self.form_layout.addRow(self.filter_layout_2)
 
     def get_log_type(self):
-        """Send a signal to the main window with the selectad log tag"""
+        """Send a signal to the main window with the selected log tag"""
         self.filter_changed.emit(self.log_types.currentText())
-
 
 class Highlighter(QSyntaxHighlighter):
     """
@@ -359,7 +358,7 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot(str)
     def filter_document(self, msg : str):
-        """Filter the log area with the seleted tag.
+        """Filter the log area with the selected tag.
            The log area will show only the lines with the selected tag
            or untagged lines.
         :type msg: str (ALL|DEBUG|INFO|ERROR|CRITICAL|FATAL)
@@ -371,7 +370,7 @@ class MainWindow(QMainWindow):
         """
             Execute the serial dialog interface.
             If the the result (:type dialog_result : int)== 0 and the
-            connection is succefully done, start the serial_worker thread
+            connection is successfully done, start the serial_worker thread
             If the the result (:type dialog_result : int) == 1, disconnection
             was requested, the worker is closed and the serial connection are closed
         """
@@ -412,11 +411,3 @@ class MainWindow(QMainWindow):
         cursor = QTextCursor(doc)
         cursor = doc.find(text, cursor, QTextDocument.FindWholeWords)
         logger.debug(cursor.selectedText())
-
-
-if __name__ == '__main__':
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG, format="%(levelname)-8s : %(message)s")
-    app = QApplication([])
-    window = MainWindow()
-    window.show()
-    app.exec()
