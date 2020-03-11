@@ -2,8 +2,8 @@ import logging
 
 from PyQt5.QtGui import QTextDocument
 
-from logger_filters import LOGGER_TAGS, logger
-from PyQt5.Qt import QTextBlock, QTextBlockUserData, QRegularExpression
+from colorful_logger_app import LOGGER_TAGS, logger
+from PyQt5.Qt import QTextBlock, QTextCursor, QTextBlockUserData
 
 class LogUserData(QTextBlockUserData):
     tag = LOGGER_TAGS[0]
@@ -28,7 +28,6 @@ def log_filter_by_tag(document : QTextDocument, tag_selected : dict):
 
     block = document.begin()
     while block.isValid():
-        logger.debug(block.text())
         data = block.userData()
         if data is not None:
             tag: dict = data.get_data()
@@ -40,3 +39,12 @@ def log_filter_by_tag(document : QTextDocument, tag_selected : dict):
                 else :
                     block.setVisible(True)
         block = block.next()
+
+def log_search_document(document : QTextDocument, position : int, search_string : str):
+    cursor : QTextCursor
+    flag = QTextDocument.FindWholeWords
+    cursor_doc = QTextCursor(document)
+    cursor = document.find(search_string, cursor_doc,  flag)
+
+
+

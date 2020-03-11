@@ -16,8 +16,8 @@ import serial
 import serial.tools.list_ports_windows
 from serial.serialutil import SerialException
 
-from logger_filters import LOGGER_TAGS, find_tag_by_name
-from logger_filters.log_process import log_filter_by_tag, log_mark_block
+from colorful_logger_app import LOGGER_TAGS, find_tag_by_name
+from colorful_logger_app.log_process import log_filter_by_tag, log_mark_block, log_search_document
 
 logger = logging.getLogger(__name__)
 
@@ -259,7 +259,7 @@ class Highlighter(QSyntaxHighlighter):
     """
         Search for (ALL|DEBUG|INFO|ERROR|CRITICAL|FATAL) tags in the text
         inserted on the log area. Format the tag with the correspond color.
-        See logger_filters.LOGGER_TAGS
+        See colorful_logger_app.LOGGER_TAGS
     """
     def __init__(self, parent):
         super(Highlighter, self).__init__(parent)
@@ -304,6 +304,8 @@ class MainWindow(QMainWindow):
         self.setup_footer_panel()
         self.setup_serial_dialog()
 
+        self.first_search_flag = False
+
         self.serial_worker = SerialListenerWorker()
         self.serial_worker.signal.connect(self.add_line_to_log_area)
 
@@ -338,8 +340,6 @@ class MainWindow(QMainWindow):
         self.action_serial_setup.triggered.connect(self.serial_setup)
         self.serial_menu.addAction(self.action_serial_setup)
 
-
-
     def setup_text_area(self):
         """Setup the log text area and the highlighter class"""
         self.log_area = QPlainTextEdit()
@@ -355,6 +355,7 @@ class MainWindow(QMainWindow):
         self.log_filters = FilterPanel(self.log_filter_widget)
         self.log_filters.filter_changed.connect(self.filter_document)
         self.log_filters.filter_clear_button.clicked.connect(self.clear_log_area)
+        self.log_filters.filter_search_button.clicked.connect(self.search_log_area)
 
     @pyqtSlot(str)
     def filter_document(self, msg : str):
@@ -395,9 +396,22 @@ class MainWindow(QMainWindow):
     def clear_log_area(self):
         """
         clear the log area
-        :return:
         """
         self.log_area.clear()
+
+    def search_log_area(self):
+
+        text = self.log_filters.filter_line.text()
+        doc = self.log_area.document()
+
+        found = False
+
+        if len(text) == 0:
+            return
+        cursor : QTextCursor
+        cursor = QTextCursor(doc)
+        cursor = doc.find(text, cursor, QTextDocument.FindWholeWords)
+        logger.debug(cursor.selectedText())
 
 
 if __name__ == '__main__':

@@ -15,8 +15,6 @@ LOGGER_TAGS: List[Dict[str, str]] = [
 
 
 def  find_tag_by_name(name: str) -> dict:
-    logger.debug("searching : " + name)
     for tag in LOGGER_TAGS:
         if tag["name"] == name:
-            logger.debug("Find : " + tag["name"])
             return tag
