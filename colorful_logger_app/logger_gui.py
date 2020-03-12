@@ -434,9 +434,17 @@ class MainWindow(QMainWindow):
         cursor: QTextCursor
         doc : QTextDocument
         text : str
+        format : QTextCharFormat
 
         text = self.log_filters.filter_line.text()
         doc = self.log_area.document()
+        format = QTextCharFormat()
+        color = QColor("yellow")
+        color.setAlpha(255)
+        format.setBackground(color)
+
+        if not self.last_search_cursor.isNull():
+            self.last_search_cursor.setCharFormat(QTextCharFormat())
 
         if len(text) == 0 or text != self.last_search:
             self.last_search_cursor = QTextCursor()
@@ -445,5 +453,7 @@ class MainWindow(QMainWindow):
 
         cursor = self.last_search_cursor if not self.last_search_cursor.isNull() else QTextCursor(doc)
         cursor = doc.find(text, cursor)
+        cursor.setCharFormat(format)
+
         self.last_search_cursor = cursor
         logger.debug(cursor.selectedText())
