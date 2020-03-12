@@ -3,21 +3,18 @@ Created on 2 de mar de 2020
 
 @author: AndersonMacedo
 '''
-import sys, logging
-from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.Qt import QApplication, QRect, QHBoxLayout, QMenuBar, QGridLayout, \
-    QAction, QThread, pyqtSlot, QStandardItem, QColor, QTextDocument, QRegExp, \
-    QRegularExpression, QRegularExpressionMatch, QTextBlock, QTextCursor, \
-    QTextBlockUserData
-from PyQt5.QtGui import QSyntaxHighlighter, QTextCharFormat, QBrush, QFont
-from PyQt5.QtWidgets import *
+import logging
 
 import serial
 import serial.tools.list_ports_windows
+from PyQt5.Qt import QRect, QThread, pyqtSlot, QStandardItem, QColor, QTextDocument, QRegularExpression, QTextCursor
+from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtGui import QSyntaxHighlighter, QTextCharFormat, QBrush, QFont
+from PyQt5.QtWidgets import *
 from serial.serialutil import SerialException
 
 from colorful_logger_app import LOGGER_TAGS, find_tag_by_name
-from colorful_logger_app.log_process import log_filter_by_tag, log_mark_block, log_search_document
+from colorful_logger_app.log_process import log_filter_by_tag, log_mark_block
 
 logger = logging.getLogger(__name__)
 
@@ -47,6 +44,7 @@ class SerialListenerWorker(QThread):
 
 class SerialDialog(QDialog):
     """Create a dialog interface for connecting and disconnecting from the serial interface"""
+
     def __init__(self, parent=None):
         super(SerialDialog, self).__init__(parent)
 
@@ -56,6 +54,10 @@ class SerialDialog(QDialog):
         self.form_layout.setFormAlignment(Qt.AlignLeft)
         self.form_layout.setLabelAlignment(Qt.AlignLeft)
         self.form_layout.setContentsMargins(2, 2, 2, 2)
+
+        # TODO more ports
+        # TODO unix port sintax
+        # TODO connect with text parameters
 
         baudrate_label = QLabel("Baudrate :")
         baudrates = ["9600", "19200", "38400", "57600", "115200"]
@@ -69,7 +71,7 @@ class SerialDialog(QDialog):
 
         port_label = QLabel("Porta :")
         logger.debug("Listing ports")
-        ports = ["COM5"]
+        ports = ["COM" + str(i) for i in range(0,11)]
         self.ports_combo = QComboBox()
         model = self.ports_combo.model()
         for port in ports:
@@ -128,8 +130,8 @@ class SerialDialog(QDialog):
         self.form_layout.addRow(self.message_box)
 
         buttons_layout = QHBoxLayout()
-        buttons_layout.addWidget(self.connect_button)
-        buttons_layout.addWidget(self.disconnect_button)
+        buttons_layout.addWidget(self.connect_button, alignment=Qt.AlignJustify)
+        buttons_layout.addWidget(self.disconnect_button, alignment=Qt.AlignJustify)
         self.form_layout.addRow(buttons_layout)
 
     def connect_to_serial(self):
@@ -188,7 +190,7 @@ class SerialDialog(QDialog):
 
     def closeEvent(self, QCloseEvent):
         """if the user close the window send done(0)
-         if connected and done(1) otherwise"""
+         if connected otherwise done(1)"""
         if self.serial_handler.isOpen():
             self.done(0)
         else:
@@ -196,6 +198,7 @@ class SerialDialog(QDialog):
 
     def disconnect_from_serial(self):
         """disconnect from the serial interface send send done(1)"""
+        self.message_box.appendPlainText("Disconnected from serial")
         self.enable_all_widgets(True)
         self.disconnect_button.setEnabled(False)
         self.connect_button.setEnabled(True)
@@ -254,14 +257,16 @@ class FilterPanel(QWidget):
         """Send a signal to the main window with the selected log tag"""
         self.filter_changed.emit(self.log_types.currentText())
 
-class Highlighter(QSyntaxHighlighter):
+
+class HighlighterTag(QSyntaxHighlighter):
     """
         Search for (ALL|DEBUG|INFO|ERROR|CRITICAL|FATAL) tags in the text
         inserted on the log area. Format the tag with the correspond color.
         See colorful_logger_app.LOGGER_TAGS
     """
+
     def __init__(self, parent):
-        super(Highlighter, self).__init__(parent)
+        super(HighlighterTag, self).__init__(parent)
 
         self.highlight_rules = []
         for tag in LOGGER_TAGS:
@@ -297,6 +302,16 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
 
+        self.log_area = None                # :type QPlainTextEdit
+        self.main_document = None           # :type QTextDocument
+        self.serial_dialog = None           # :type SerialDialog
+        self.serial_menu = None             # :type QMenu
+        self.help_menu = None               # :type QMenu
+        self.log_filter_widget = None       # :type QWidget
+        self.log_filters = None             # :type FilterPanel
+        self.last_search = str()
+        self.last_search_cursor = QTextCursor()
+
         container = QWidget()
         self.setup_menu()
         self.setup_text_area()
@@ -322,7 +337,6 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Beautiful Logger")
         self.setGeometry(QRect(100, 100, 800, 600))
 
-
     def closeEvent(self, event):
         self.serial_dialog.serial_handler.close()
         del self.serial_worker
@@ -334,10 +348,15 @@ class MainWindow(QMainWindow):
     def setup_menu(self):
         """Setup the menu"""
         self.serial_menu = self.menuBar().addMenu("Serial")
+        self.help_menu = self.menuBar().addMenu("Help")
 
-        self.action_serial_setup = QAction("Setup", self)
-        self.action_serial_setup.triggered.connect(self.serial_setup)
-        self.serial_menu.addAction(self.action_serial_setup)
+        action_serial_setup = QAction("Setup", self)
+        action_serial_setup.triggered.connect(self.serial_setup)
+        self.serial_menu.addAction(action_serial_setup)
+
+        action_about_box = QAction("About", self)
+        action_about_box.triggered.connect(self.about_box_show)
+        self.help_menu.addAction(action_about_box)
 
     def setup_text_area(self):
         """Setup the log text area and the highlighter class"""
@@ -346,7 +365,7 @@ class MainWindow(QMainWindow):
         self.log_area.centerOnScroll()
 
         self.main_document = self.log_area.document()
-        highlighter = Highlighter(self.log_area.document())
+        HighlighterTag(self.log_area.document())
 
     def setup_footer_panel(self):
         """Setup the footer area"""
@@ -357,7 +376,7 @@ class MainWindow(QMainWindow):
         self.log_filters.filter_search_button.clicked.connect(self.search_log_area)
 
     @pyqtSlot(str)
-    def filter_document(self, msg : str):
+    def filter_document(self, msg: str):
         """Filter the log area with the selected tag.
            The log area will show only the lines with the selected tag
            or untagged lines.
@@ -384,6 +403,14 @@ class MainWindow(QMainWindow):
             self.serial_worker.terminate()
             self.serial_dialog.serial_handler.close()
 
+    def about_box_show(self):
+        about_msg_box = QMessageBox(self)
+        about_msg_box.addButton(QPushButton("OK"), QMessageBox.YesRole)
+        about_msg_box.setWindowTitle("Colorful Logger")
+        about_msg_box.setText("VERSION 0.1")
+        #about_msg_box.about(self, ).show()
+        about_msg_box.exec()
+
     @pyqtSlot(str)
     def add_line_to_log_area(self, log):
         """
@@ -399,15 +426,24 @@ class MainWindow(QMainWindow):
         self.log_area.clear()
 
     def search_log_area(self):
+        """ Search a word in log area.
+        Keep last cursor and word used for iteration
+        in the document.
+        """
+
+        cursor: QTextCursor
+        doc : QTextDocument
+        text : str
 
         text = self.log_filters.filter_line.text()
         doc = self.log_area.document()
 
-        found = False
-
-        if len(text) == 0:
+        if len(text) == 0 or text != self.last_search:
+            self.last_search_cursor = QTextCursor()
+            self.last_search = text
             return
-        cursor : QTextCursor
-        cursor = QTextCursor(doc)
-        cursor = doc.find(text, cursor, QTextDocument.FindWholeWords)
+
+        cursor = self.last_search_cursor if not self.last_search_cursor.isNull() else QTextCursor(doc)
+        cursor = doc.find(text, cursor)
+        self.last_search_cursor = cursor
         logger.debug(cursor.selectedText())
