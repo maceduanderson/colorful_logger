@@ -1,0 +1,305 @@
+DEBUG - TESTE1
+ERROR - TESTE2
+[2020/04/11 15:06:23] DEBUG src/display.c:476: [displayShowMessageDialog] - message : VERSÃO SOFTWARE
+0100
+Feb 20 2020 11:35:45
+[2020/04/11 15:06:23] DEBUG src/display.c:477: [displayShowMessageDialog] - messageAlign : 2
+[2020/04/11 15:06:23] DEBUG src/display.c:478: [displayShowMessageDialog] - dialogType : 6
+[2020/04/11 15:06:23] DEBUG src/display.c:479: [displayShowMessageDialog] - buttonMask : 0
+[2020/04/11 15:06:23] DEBUG src/display.c:480: [displayShowMessageDialog] - timeout : 0
+[2020/04/11 15:06:23] DEBUG src/display.c:487: [displayShowMessageDialog] - line : 1
+[2020/04/11 15:06:23] DEBUG src/display.c:512: [displayShowMessageDialog] - substring : VERSÃO SOFTWARE
+[2020/04/11 15:06:23] DEBUG src/display.c:512: [displayShowMessageDialog] - substring :  0100
+[2020/04/11 15:06:23] DEBUG src/display.c:527: [displayShowMessageDialog] - ultima substring
+[2020/04/11 15:06:23] DEBUG src/display.c:528: [displayShowMessageDialog] - substring : Feb 20 2020 11:35:45
+[2020/04/11 15:06:23] DEBUG src/display.c:633: [displayShowMessageDialog] - saiu
+[2020/04/11 15:06:24] DEBUG src/Config.c:2435: configGet: struct size [7064]
+[2020/04/11 15:06:24] DEBUG src/Config.c:3110: ----configGetFloorLimit[IN]----
+[2020/04/11 15:06:24] DEBUG src/TrxInput.c:30: Loading Trans Old: struct size [8936]
+[2020/04/11 15:06:25] retorno gprsInit: -201
+[2020/04/11 15:06:25] DEBUG src/display.c:475: [displayShowMessageDialog] - title : (null)
+[2020/04/11 15:06:25] DEBUG src/display.c:476: [displayShowMessageDialog] - message : TERMINAL SEM SIMCARD
+[2020/04/11 15:06:25] DEBUG src/display.c:477: [displayShowMessageDialog] - messageAlign : 2
+[2020/04/11 15:06:25] DEBUG src/display.c:478: [displayShowMessageDialog] - dialogType : 6
+[2020/04/11 15:06:25] DEBUG src/display.c:479: [displayShowMessageDialog] - buttonMask : 0
+[2020/04/11 15:06:25] DEBUG src/display.c:480: [displayShowMessageDialog] - timeout : 0
+[2020/04/11 15:06:25] DEBUG src/display.c:487: [displayShowMessageDialog] - line : 1
+[2020/04/11 15:06:25] DEBUG src/display.c:633: [displayShowMessageDialog] - saiu
+[2020/04/11 15:06:32] DEBUG src/MenuApp.c:115: sSetBanricompras - Entrou
+[2020/04/11 15:06:32] DEBUG src/MenuApp.c:68: sSetMain - Entrou
+[2020/04/11 15:06:32] DEBUG src/MenuApp.c:83: sSetMainCleanTerm - Entrou
+[2020/04/11 15:06:32] DEBUG src/MenuApp.c:96: sSetMainNoTouch - Entrou
+[2020/04/11 15:06:32] DEBUG src/MenuApp.c:127: sSetPagamentos - Entrou
+[2020/04/11 15:06:32] DEBUG src/Config.c:2044: ---------Iniciando AutoConfigGPRS------------
+[2020/04/11 15:06:32] DEBUG src/display.c:475: [displayShowMessageDialog] - title : (null)
+[2020/04/11 15:06:32] DEBUG src/display.c:476: [displayShowMessageDialog] - message : AGUARDE...
+[2020/04/11 15:06:32] DEBUG src/display.c:477: [displayShowMessageDialog] - messageAlign : 2
+[2020/04/11 15:06:32] DEBUG src/display.c:478: [displayShowMessageDialog] - dialogType : 6
+[2020/04/11 15:06:32] DEBUG src/display.c:479: [displayShowMessageDialog] - buttonMask : 0
+[2020/04/11 15:06:32] DEBUG src/display.c:480: [displayShowMessageDialog] - timeout : 0
+[2020/04/11 15:06:32] DEBUG src/display.c:487: [displayShowMessageDialog] - line : 1
+[2020/04/11 15:06:32] DEBUG src/display.c:633: [displayShowMessageDialog] - saiu
+[2020/04/11 15:06:32] DEBUG src/Config.c:1986: [configGPRSCheckSimInserted] - gprsSetSimcardSlot : 0
+[2020/04/11 15:06:33] DEBUG src/Config.c:1999: [configGPRSCheckSimInserted] - gprsGetCCIDFromAtCommand
+[2020/04/11 15:06:33] DEBUG src/Config.c:2000: [configGPRSCheckSimInserted] - ret : -1
+[2020/04/11 15:06:33] DEBUG src/Config.c:2001: [configGPRSCheckSimInserted] - ccid_f_atcmd :
+[2020/04/11 15:06:34] DEBUG src/Config.c:1999: [configGPRSCheckSimInserted] - gprsGetCCIDFromAtCommand
+[2020/04/11 15:06:34] DEBUG src/Config.c:2000: [configGPRSCheckSimInserted] - ret : -1
+[2020/04/11 15:06:34] DEBUG src/Config.c:2001: [configGPRSCheckSimInserted] - ccid_f_atcmd :
+[2020/04/11 15:06:35] DEBUG src/Config.c:1999: [configGPRSCheckSimInserted] - gprsGetCCIDFromAtCommand
+[2020/04/11 15:06:35] DEBUG src/Config.c:2000: [configGPRSCheckSimInserted] - ret : -1
+[2020/04/11 15:06:35] DEBUG src/Config.c:2001: [configGPRSCheckSimInserted] - ccid_f_atcmd :
+[2020/04/11 15:06:36] DEBUG src/Config.c:1999: [configGPRSCheckSimInserted] - gprsGetCCIDFromAtCommand
+[2020/04/11 15:06:36] DEBUG src/Config.c:2000: [configGPRSCheckSimInserted] - ret : -1
+[2020/04/11 15:06:36] DEBUG src/Config.c:2001: [configGPRSCheckSimInserted] - ccid_f_atcmd :
+[2020/04/11 15:06:37] DEBUG src/Config.c:1999: [configGPRSCheckSimInserted] - gprsGetCCIDFromAtCommand
+[2020/04/11 15:06:37] DEBUG src/Config.c:2000: [configGPRSCheckSimInserted] - ret : -1
+[2020/04/11 15:06:37] DEBUG src/Config.c:2001: [configGPRSCheckSimInserted] - ccid_f_atcmd :
+[2020/04/11 15:06:38] DEBUG src/Config.c:1999: [configGPRSCheckSimInserted] - gprsGetCCIDFromAtCommand
+[2020/04/11 15:06:38] DEBUG src/Config.c:2000: [configGPRSCheckSimInserted] - ret : -1
+[2020/04/11 15:06:38] DEBUG src/Config.c:2001: [configGPRSCheckSimInserted] - ccid_f_atcmd :
+[2020/04/11 15:06:39] DEBUG src/Config.c:1999: [configGPRSCheckSimInserted] - gprsGetCCIDFromAtCommand
+[2020/04/11 15:06:39] DEBUG src/Config.c:2000: [configGPRSCheckSimInserted] - ret : -1
+[2020/04/11 15:06:39] DEBUG src/Config.c:2001: [configGPRSCheckSimInserted] - ccid_f_atcmd :
+[2020/04/11 15:06:40] DEBUG src/Config.c:1999: [configGPRSCheckSimInserted] - gprsGetCCIDFromAtCommand
+[2020/04/11 15:06:40] DEBUG src/Config.c:2000: [configGPRSCheckSimInserted] - ret : -1
+[2020/04/11 15:06:40] DEBUG src/Config.c:2001: [configGPRSCheckSimInserted] - ccid_f_atcmd :
+[2020/04/11 15:06:41] DEBUG src/Config.c:1999: [configGPRSCheckSimInserted] - gprsGetCCIDFromAtCommand
+[2020/04/11 15:06:41] DEBUG src/Config.c:2000: [configGPRSCheckSimInserted] - ret : -1
+[2020/04/11 15:06:41] DEBUG src/Config.c:2001: [configGPRSCheckSimInserted] - ccid_f_atcmd :
+[2020/04/11 15:06:42] DEBUG src/Config.c:1999: [configGPRSCheckSimInserted] - gprsGetCCIDFromAtCommand
+[2020/04/11 15:06:42] DEBUG src/Config.c:2000: [configGPRSCheckSimInserted] - ret : -1
+[2020/04/11 15:06:42] DEBUG src/Config.c:2001: [configGPRSCheckSimInserted] - ccid_f_atcmd :
+[2020/04/11 15:06:42] DEBUG src/CommCore.c:48: [setup_gprs] - current status = 0
+[2020/04/11 15:06:42] [gprsPPPConnect] - status, code = 2 0
+[2020/04/11 15:06:43] DEBUG src/CommCore.c:646: [commStart] - Start
+[2020/04/11 15:06:43] DEBUG src/CommCore.c:458: FramePredial IN
+[2020/04/11 15:06:43] DEBUG src/CommCore.c:375: commSetParamWifi config [0]
+[2020/04/11 15:06:43] DEBUG src/CommCore.c:381: Wifi ResolveIP
+[2020/04/11 15:06:43] DEBUG src/Util.c:342: [util_hostname_to_ip] - hostname : 174.138.59.124
+[2020/04/11 15:06:43] DEBUG src/Util.c:357: [util_hostname_to_ip] - IPV4 address : 174.138.59.124
+[2020/04/11 15:06:43] DEBUG src/CommCore.c:383: Wifi ResolveIP end
+[2020/04/11 15:06:43] DEBUG comm/tcpSSL.c:684: [tcp_ssl_comm_config_create] - Start
+[2020/04/11 15:06:43] DEBUG src/CommCore.c:600: FramePredial OUT
+[2020/04/11 15:06:43] DEBUG src/CommCore.c:603: prim [103/OK] sec [255/ERR]
+[2020/04/11 15:06:43] DEBUG src/CommCore.c:630: commStartBuildChannel
+[2020/04/11 15:06:43] DEBUG src/CommCore.c:640: commStartBuildChannel ok
+[2020/04/11 15:06:43] DEBUG src/CommCore.c:661: [commStart] - Start Ok
+[2020/04/11 15:06:43] DEBUG src/TrxInput.c:87: TransInit
+[2020/04/11 15:06:48] Entrando no menu [VERO]
+[2020/04/11 15:06:48] SelectedOption: 0
+[2020/04/11 15:06:49] UP Pressionado...
+[2020/04/11 15:06:50] ENTER Pressionado... Executando
+[2020/04/11 15:06:50] DEBUG src/TrxInput.c:87: TransInit
+[2020/04/11 15:06:50] Entrando no menu [testes]
+[2020/04/11 15:06:50] SelectedOption: 0
+[2020/04/11 15:06:50] UP Pressionado...
+[2020/04/11 15:06:50] UP Pressionado...
+[2020/04/11 15:06:52] ESC Pressionado... Saindo
+[2020/04/11 15:06:52] Entrando no menu [VERO]
+[2020/04/11 15:06:52] SelectedOption: 3
+[2020/04/11 15:06:53] UP Pressionado...
+[2020/04/11 15:06:53] UP Pressionado...
+[2020/04/11 15:06:54] ENTER Pressionado... Executando
+[2020/04/11 15:06:54] Entrando no menu [Administrativo]
+[2020/04/11 15:06:54] SelectedOption: 0
+[2020/04/11 15:06:54] UP Pressionado...
+[2020/04/11 15:06:55] UP Pressionado...
+[2020/04/11 15:06:55] UP Pressionado...
+[2020/04/11 15:06:56] ENTER Pressionado... Executando
+[2020/04/11 15:06:56] DEBUG src/TrxAdministrativas.c:605: <---admRunConsultaRede--->
+[2020/04/11 15:06:56] DEBUG src/TrxEnd.c:17: operCheckFlags
+[2020/04/11 15:06:56] DEBUG src/Config.c:215: configCheckParams
+[2020/04/11 15:06:56] DEBUG src/Config.c:226: configCheckInitParams
+[2020/04/11 15:06:56] DEBUG src/TrxAdministrativas.c:76: sInitOperation
+[2020/04/11 15:06:56] DEBUG src/Config.c:215: configCheckParams
+[2020/04/11 15:06:56] DEBUG src/Config.c:226: configCheckInitParams
+[2020/04/11 15:06:56] DEBUG src/TrxInput.c:87: TransInit
+[2020/04/11 15:06:56] DEBUG src/TrxAdministrativas.c:181: CONFIRMADA
+[2020/04/11 15:06:56] DEBUG src/TrxAdministrativas.c:230: sPrepareConnection
+[2020/04/11 15:06:56] DEBUG src/TrxAdministrativas.c:241: sConnect
+[2020/04/11 15:06:56] DEBUG src/TrxAdministrativas.c:242: ADM-COMMStartConnection
+[2020/04/11 15:06:56] DEBUG src/TrxAdministrativas.c:248: ADM-COMWaitConnection
+[2020/04/11 15:06:56] commLib.c connect config [0]
+[2020/04/11 15:06:56] DEBUG src/CommCore.c:150: beforeConnectionCallback - 15:6:56
+[2020/04/11 15:06:56] INFO  comm/tcpSSL.c:324: [tcp_ssl_open_conn] - Start
+[2020/04/11 15:06:56] INFO  comm/tcpSSL.c:325: [tcp_ssl_open_conn] - Host 			 - 174.138.59.124
+[2020/04/11 15:06:56] DEBUG src/CommCore.c:150: onInitializationCallback - 15:6:56
+[2020/04/11 15:06:56] INFO  comm/tcpSSL.c:326: [tcp_ssl_open_conn] - Port 			 - 9280
+[2020/04/11 15:06:56] INFO  comm/tcpSSL.c:327: [tcp_ssl_open_conn] - Connect Timeout - 30
+[2020/04/11 15:06:56] INFO  comm/tcpSSL.c:328: [tcp_ssl_open_conn] - Comm Timeout    - 30
+[2020/04/11 15:06:56] INFO  comm/tcpSSL.c:329: [tcp_ssl_open_conn] - Physical_layer  - 2
+[2020/04/11 15:06:56] INFO  comm/tcpSSL.c:330: [tcp_ssl_open_conn] - EnableSSL       - 0
+[2020/04/11 15:06:56] DEBUG src/display.c:475: [displayShowMessageDialog] - title : (null)
+[2020/04/11 15:06:56] DEBUG src/display.c:476: [displayShowMessageDialog] - message : CONECTANDO 1
+[2020/04/11 15:06:56] DEBUG src/display.c:477: [displayShowMessageDialog] - messageAlign : 2
+[2020/04/11 15:06:56] DEBUG src/display.c:478: [displayShowMessageDialog] - dialogType : 6
+[2020/04/11 15:06:56] DEBUG src/display.c:479: [displayShowMessageDialog] - buttonMask : 0
+[2020/04/11 15:06:56] DEBUG src/display.c:480: [displayShowMessageDialog] - timeout : 0
+[2020/04/11 15:06:56] DEBUG src/display.c:487: [displayShowMessageDialog] - line : 1
+[2020/04/11 15:06:56] ERROR comm/tcpSSL.c:368: [tcp_ssl_open_conn] - wifi not connected
+[2020/04/11 15:06:56] ERROR comm/tcpSSL.c:56: [s_tcp_ssl_set_error] - error : -10005
+[2020/04/11 15:06:56] DEBUG src/display.c:633: [displayShowMessageDialog] - saiu
+[2020/04/11 15:06:56] INFO  comm/tcpSSL.c:324: [tcp_ssl_open_conn] - Start
+[2020/04/11 15:06:56] DEBUG src/CommCore.c:150: onInitializationCallback - 15:6:56
+[2020/04/11 15:06:56] INFO  comm/tcpSSL.c:325: [tcp_ssl_open_conn] - Host 			 - 174.138.59.124
+[2020/04/11 15:06:56] INFO  comm/tcpSSL.c:326: [tcp_ssl_open_conn] - Port 			 - 9280
+[2020/04/11 15:06:56] INFO  comm/tcpSSL.c:327: [tcp_ssl_open_conn] - Connect Timeout - 30
+[2020/04/11 15:06:56] INFO  comm/tcpSSL.c:328: [tcp_ssl_open_conn] - Comm Timeout    - 30
+[2020/04/11 15:06:56] INFO  comm/tcpSSL.c:329: [tcp_ssl_open_conn] - Physical_layer  - 2
+[2020/04/11 15:06:56] INFO  comm/tcpSSL.c:330: [tcp_ssl_open_conn] - EnableSSL       - 0
+[2020/04/11 15:06:56] DEBUG src/display.c:475: [displayShowMessageDialog] - title : (null)
+[2020/04/11 15:06:56] DEBUG src/display.c:476: [displayShowMessageDialog] - message : CONECTANDO 2
+[2020/04/11 15:06:56] DEBUG src/display.c:477: [displayShowMessageDialog] - messageAlign : 2
+[2020/04/11 15:06:57] DEBUG src/display.c:478: [displayShowMessageDialog] - dialogType : 6
+[2020/04/11 15:06:57] DEBUG src/display.c:479: [displayShowMessageDialog] - buttonMask : 0
+[2020/04/11 15:06:57] DEBUG src/display.c:480: [displayShowMessageDialog] - timeout : 0
+[2020/04/11 15:06:57] DEBUG src/display.c:487: [displayShowMessageDialog] - line : 1
+[2020/04/11 15:06:57] ERROR comm/tcpSSL.c:368: [tcp_ssl_open_conn] - wifi not connected
+[2020/04/11 15:06:57] ERROR comm/tcpSSL.c:56: [s_tcp_ssl_set_error] - error : -10005
+[2020/04/11 15:06:57] DEBUG src/display.c:633: [displayShowMessageDialog] - saiu
+[2020/04/11 15:06:57] DEBUG src/CommCore.c:150: onInitializationCallback - 15:6:57
+[2020/04/11 15:06:57] INFO  comm/tcpSSL.c:324: [tcp_ssl_open_conn] - Start
+[2020/04/11 15:06:57] INFO  comm/tcpSSL.c:325: [tcp_ssl_open_conn] - Host 			 - 174.138.59.124
+[2020/04/11 15:06:57] INFO  comm/tcpSSL.c:326: [tcp_ssl_open_conn] - Port 			 - 9280
+[2020/04/11 15:06:57] INFO  comm/tcpSSL.c:327: [tcp_ssl_open_conn] - Connect Timeout - 30
+[2020/04/11 15:06:57] INFO  comm/tcpSSL.c:328: [tcp_ssl_open_conn] - Comm Timeout    - 30
+[2020/04/11 15:06:57] INFO  comm/tcpSSL.c:329: [tcp_ssl_open_conn] - Physical_layer  - 2
+[2020/04/11 15:06:57] INFO  comm/tcpSSL.c:330: [tcp_ssl_open_conn] - EnableSSL       - 0
+[2020/04/11 15:06:57] DEBUG src/display.c:475: [displayShowMessageDialog] - title : (null)
+[2020/04/11 15:06:57] DEBUG src/display.c:476: [displayShowMessageDialog] - message : CONECTANDO 3
+[2020/04/11 15:06:57] DEBUG src/display.c:477: [displayShowMessageDialog] - messageAlign : 2
+[2020/04/11 15:06:57] DEBUG src/display.c:478: [displayShowMessageDialog] - dialogType : 6
+[2020/04/11 15:06:57] DEBUG src/display.c:479: [displayShowMessageDialog] - buttonMask : 0
+[2020/04/11 15:06:57] DEBUG src/display.c:480: [displayShowMessageDialog] - timeout : 0
+[2020/04/11 15:06:57] DEBUG src/display.c:487: [displayShowMessageDialog] - line : 1
+[2020/04/11 15:06:57] ERROR comm/tcpSSL.c:368: [tcp_ssl_open_conn] - wifi not connected
+[2020/04/11 15:06:57] ERROR comm/tcpSSL.c:56: [s_tcp_ssl_set_error] - error : -10005
+[2020/04/11 15:06:57] DEBUG src/display.c:633: [displayShowMessageDialog] - saiu
+[2020/04/11 15:06:57] DEBUG src/CommCore.c:759: Error waiting connection
+[2020/04/11 15:06:57] DEBUG src/CommCore.c:150: errorCallback - 15:6:57
+[2020/04/11 15:06:57] DEBUG src/CommCore.c:763: Current Error [-10005]
+[2020/04/11 15:06:57] DEBUG src/display.c:475: [displayShowMessageDialog] - title : (null)
+[2020/04/11 15:06:57] DEBUG src/display.c:476: [displayShowMessageDialog] - message : FALHA NA COMUNICAÇÃO (W2)
+[2020/04/11 15:06:57] DEBUG src/display.c:477: [displayShowMessageDialog] - messageAlign : 2
+[2020/04/11 15:06:57] DEBUG src/display.c:478: [displayShowMessageDialog] - dialogType : 3
+[2020/04/11 15:06:57] DEBUG src/display.c:479: [displayShowMessageDialog] - buttonMask : 5
+[2020/04/11 15:06:57] DEBUG src/display.c:480: [displayShowMessageDialog] - timeout : 5
+[2020/04/11 15:06:57] DEBUG src/display.c:487: [displayShowMessageDialog] - line : 5
+[2020/04/11 15:07:04] DEBUG src/display.c:633: [displayShowMessageDialog] - saiu
+[2020/04/11 15:07:04] DEBUG src/CommCore.c:794: message[FALHA NA COMUNICAÇÃO (W2)]
+[2020/04/11 15:07:04] DEBUG src/TrxAdministrativas.c:463: sFinishOperation
+[2020/04/11 15:07:04] DEBUG src/TrxAdministrativas.c:464: ADM-COMDestroy-Start
+[2020/04/11 15:07:04] DEBUG src/display.c:475: [displayShowMessageDialog] - title : (null)
+[2020/04/11 15:07:04] DEBUG src/display.c:476: [displayShowMessageDialog] - message : DESCONECTANDO
+[2020/04/11 15:07:04] DEBUG src/display.c:477: [displayShowMessageDialog] - messageAlign : 2
+[2020/04/11 15:07:04] DEBUG src/display.c:478: [displayShowMessageDialog] - dialogType : 6
+[2020/04/11 15:07:04] DEBUG src/display.c:479: [displayShowMessageDialog] - buttonMask : 0
+[2020/04/11 15:07:04] DEBUG src/display.c:480: [displayShowMessageDialog] - timeout : 0
+[2020/04/11 15:07:04] DEBUG src/display.c:487: [displayShowMessageDialog] - line : 1
+[2020/04/11 15:07:04] DEBUG src/display.c:633: [displayShowMessageDialog] - saiu
+[2020/04/11 15:07:04] DEBUG src/CommCore.c:946: Disconnect...
+[2020/04/11 15:07:04] DEBUG src/TrxAdministrativas.c:467: ADM-COMDestroy-End
+[2020/04/11 15:07:44] DEBUG src/Events.c:123: [event_schedule] - start
+[2020/04/11 15:07:44] DEBUG src/Config.c:2435: configGet: struct size [7064]
+[2020/04/11 15:07:44] DEBUG src/TrxEnd.c:17: operCheckFlags
+[2020/04/11 15:07:44] DEBUG src/Config.c:215: configCheckParams
+[2020/04/11 15:07:44] DEBUG src/Config.c:226: configCheckInitParams
+[2020/04/11 15:07:44] DEBUG src/Config.c:2435: configGet: struct size [7064]
+[2020/04/11 15:07:44] DEBUG src/TrxInput.c:30: Loading Trans Old: struct size [8936]
+[2020/04/11 15:07:44] DEBUG src/Config.c:92: [configCheckNecessitaFinalizacao] - configCheckNecessitaFinalizacao
+[2020/04/11 15:07:44] DEBUG src/Config.c:107: [configCheckNecessitaFinalizacao] - config_current.dataFinalizacao : 02/03/2020
+[2020/04/11 15:07:44] DEBUG src/TrxAdministrativas.c:733: <---admRunFechamento--->
+[2020/04/11 15:07:44] DEBUG src/TrxAdministrativas.c:76: sInitOperation
+[2020/04/11 15:07:44] DEBUG src/Config.c:215: configCheckParams
+[2020/04/11 15:07:44] DEBUG src/Config.c:226: configCheckInitParams
+[2020/04/11 15:07:44] DEBUG src/TrxInput.c:87: TransInit
+[2020/04/11 15:07:44] DEBUG src/TrxAdministrativas.c:181: CONFIRMADA
+[2020/04/11 15:07:44] DEBUG src/TrxAdministrativas.c:230: sPrepareConnection
+[2020/04/11 15:07:44] DEBUG src/TrxAdministrativas.c:241: sConnect
+[2020/04/11 15:07:44] DEBUG src/TrxAdministrativas.c:242: ADM-COMMStartConnection
+[2020/04/11 15:07:44] DEBUG src/TrxAdministrativas.c:248: ADM-COMWaitConnection
+[2020/04/11 15:07:44] commLib.c connect config [0]
+[2020/04/11 15:07:44] DEBUG src/CommCore.c:150: beforeConnectionCallback - 15:7:44
+[2020/04/11 15:07:44] INFO  comm/tcpSSL.c:324: [tcp_ssl_open_conn] - Start
+[2020/04/11 15:07:44] DEBUG src/CommCore.c:150: onInitializationCallback - 15:7:44
+[2020/04/11 15:07:44] INFO  comm/tcpSSL.c:325: [tcp_ssl_open_conn] - Host 			 - 174.138.59.124
+[2020/04/11 15:07:44] INFO  comm/tcpSSL.c:326: [tcp_ssl_open_conn] - Port 			 - 9280
+[2020/04/11 15:07:44] INFO  comm/tcpSSL.c:327: [tcp_ssl_open_conn] - Connect Timeout - 30
+[2020/04/11 15:07:44] INFO  comm/tcpSSL.c:328: [tcp_ssl_open_conn] - Comm Timeout    - 30
+[2020/04/11 15:07:44] INFO  comm/tcpSSL.c:329: [tcp_ssl_open_conn] - Physical_layer  - 2
+[2020/04/11 15:07:44] INFO  comm/tcpSSL.c:330: [tcp_ssl_open_conn] - EnableSSL       - 0
+[2020/04/11 15:07:44] DEBUG src/display.c:475: [displayShowMessageDialog] - title : (null)
+[2020/04/11 15:07:44] DEBUG src/display.c:476: [displayShowMessageDialog] - message : CONECTANDO 1
+[2020/04/11 15:07:44] DEBUG src/display.c:477: [displayShowMessageDialog] - messageAlign : 2
+[2020/04/11 15:07:44] DEBUG src/display.c:478: [displayShowMessageDialog] - dialogType : 6
+[2020/04/11 15:07:44] DEBUG src/display.c:479: [displayShowMessageDialog] - buttonMask : 0
+[2020/04/11 15:07:44] DEBUG src/display.c:480: [displayShowMessageDialog] - timeout : 0
+[2020/04/11 15:07:44] DEBUG src/display.c:487: [displayShowMessageDialog] - line : 1
+[2020/04/11 15:07:44] ERROR comm/tcpSSL.c:368: [tcp_ssl_open_conn] - wifi not connected
+[2020/04/11 15:07:44] ERROR comm/tcpSSL.c:56: [s_tcp_ssl_set_error] - error : -10005
+[2020/04/11 15:07:44] DEBUG src/display.c:633: [displayShowMessageDialog] - saiu
+[2020/04/11 15:07:44] DEBUG src/CommCore.c:150: onInitializationCallback - 15:7:44
+[2020/04/11 15:07:44] INFO  comm/tcpSSL.c:324: [tcp_ssl_open_conn] - Start
+[2020/04/11 15:07:44] INFO  comm/tcpSSL.c:325: [tcp_ssl_open_conn] - Host 			 - 174.138.59.124
+[2020/04/11 15:07:44] INFO  comm/tcpSSL.c:326: [tcp_ssl_open_conn] - Port 			 - 9280
+[2020/04/11 15:07:44] DEBUG src/display.c:475: [displayShowMessageDialog] - title : (null)
+[2020/04/11 15:07:44] INFO  comm/tcpSSL.c:327: [tcp_ssl_open_conn] - Connect Timeout - 30
+[2020/04/11 15:07:44] DEBUG src/display.c:476: [displayShowMessageDialog] - message : CONECTANDO 2
+[2020/04/11 15:07:44] INFO  comm/tcpSSL.c:328: [tcp_ssl_open_conn] - Comm Timeout    - 30
+[2020/04/11 15:07:44] DEBUG src/display.c:477: [displayShowMessageDialog] - messageAlign : 2
+[2020/04/11 15:07:44] INFO  comm/tcpSSL.c:329: [tcp_ssl_open_conn] - Physical_layer  - 2
+[2020/04/11 15:07:44] DEBUG src/display.c:478: [displayShowMessageDialog] - dialogType : 6
+[2020/04/11 15:07:44] INFO  comm/tcpSSL.c:330: [tcp_ssl_open_conn] - EnableSSL       - 0
+[2020/04/11 15:07:44] DEBUG src/display.c:479: [displayShowMessageDialog] - buttonMask : 0
+[2020/04/11 15:07:44] DEBUG src/display.c:480: [displayShowMessageDialog] - timeout : 0
+[2020/04/11 15:07:44] DEBUG src/display.c:487: [displayShowMessageDialog] - line : 1
+[2020/04/11 15:07:45] DEBUG src/display.c:633: [displayShowMessageDialog] - saiu
+[2020/04/11 15:07:45] ERROR comm/tcpSSL.c:368: [tcp_ssl_open_conn] - wifi not connected
+[2020/04/11 15:07:45] ERROR comm/tcpSSL.c:56: [s_tcp_ssl_set_error] - error : -10005
+[2020/04/11 15:07:45] INFO  comm/tcpSSL.c:324: [tcp_ssl_open_conn] - Start
+[2020/04/11 15:07:45] DEBUG src/CommCore.c:150: onInitializationCallback - 15:7:45
+[2020/04/11 15:07:45] INFO  comm/tcpSSL.c:325: [tcp_ssl_open_conn] - Host 			 - 174.138.59.124
+[2020/04/11 15:07:45] INFO  comm/tcpSSL.c:326: [tcp_ssl_open_conn] - Port 			 - 9280
+[2020/04/11 15:07:45] INFO  comm/tcpSSL.c:327: [tcp_ssl_open_conn] - Connect Timeout - 30
+[2020/04/11 15:07:45] INFO  comm/tcpSSL.c:328: [tcp_ssl_open_conn] - Comm Timeout    - 30
+[2020/04/11 15:07:45] DEBUG src/display.c:475: [displayShowMessageDialog] - title : (null)
+[2020/04/11 15:07:45] INFO  comm/tcpSSL.c:329: [tcp_ssl_open_conn] - Physical_layer  - 2
+[2020/04/11 15:07:45] DEBUG src/display.c:476: [displayShowMessageDialog] - message : CONECTANDO 3
+[2020/04/11 15:07:45] INFO  comm/tcpSSL.c:330: [tcp_ssl_open_conn] - EnableSSL       - 0
+[2020/04/11 15:07:45] DEBUG src/display.c:477: [displayShowMessageDialog] - messageAlign : 2
+[2020/04/11 15:07:45] DEBUG src/display.c:478: [displayShowMessageDialog] - dialogType : 6
+[2020/04/11 15:07:45] DEBUG src/display.c:479: [displayShowMessageDialog] - buttonMask : 0
+[2020/04/11 15:07:45] DEBUG src/display.c:480: [displayShowMessageDialog] - timeout : 0
+[2020/04/11 15:07:45] DEBUG src/display.c:487: [displayShowMessageDialog] - line : 1
+[2020/04/11 15:07:45] DEBUG src/display.c:633: [displayShowMessageDialog] - saiu
+[2020/04/11 15:07:45] ERROR comm/tcpSSL.c:368: [tcp_ssl_open_conn] - wifi not connected
+[2020/04/11 15:07:45] ERROR comm/tcpSSL.c:56: [s_tcp_ssl_set_error] - error : -10005
+[2020/04/11 15:07:45] DEBUG src/CommCore.c:759: Error waiting connection
+[2020/04/11 15:07:45] DEBUG src/CommCore.c:150: errorCallback - 15:7:45
+[2020/04/11 15:07:45] DEBUG src/CommCore.c:763: Current Error [-10005]
+[2020/04/11 15:07:45] DEBUG src/display.c:475: [displayShowMessageDialog] - title : (null)
+[2020/04/11 15:07:45] DEBUG src/display.c:476: [displayShowMessageDialog] - message : FALHA NA COMUNICAÇÃO (W2)
+[2020/04/11 15:07:45] DEBUG src/display.c:477: [displayShowMessageDialog] - messageAlign : 2
+[2020/04/11 15:07:45] DEBUG src/display.c:478: [displayShowMessageDialog] - dialogType : 3
+[2020/04/11 15:07:45] DEBUG src/display.c:479: [displayShowMessageDialog] - buttonMask : 5
+[2020/04/11 15:07:45] DEBUG src/display.c:480: [displayShowMessageDialog] - timeout : 5
+[2020/04/11 15:07:45] DEBUG src/display.c:487: [displayShowMessageDialog] - line : 5
+[2020/04/11 15:07:52] DEBUG src/display.c:633: [displayShowMessageDialog] - saiu
+[2020/04/11 15:07:52] DEBUG src/CommCore.c:794: message[FALHA NA COMUNICAÇÃO (W2)]
+[2020/04/11 15:07:52] DEBUG src/TrxAdministrativas.c:463: sFinishOperation
+[2020/04/11 15:07:52] DEBUG src/TrxAdministrativas.c:464: ADM-COMDestroy-Start
+[2020/04/11 15:07:52] DEBUG src/display.c:475: [displayShowMessageDialog] - title : (null)
+[2020/04/11 15:07:52] DEBUG src/display.c:476: [displayShowMessageDialog] - message : DESCONECTANDO
+[2020/04/11 15:07:52] DEBUG src/display.c:477: [displayShowMessageDialog] - messageAlign : 2
+[2020/04/11 15:07:52] DEBUG src/display.c:478: [displayShowMessageDialog] - dialogType : 6
+[2020/04/11 15:07:52] DEBUG src/display.c:479: [displayShowMessageDialog] - buttonMask : 0
+[2020/04/11 15:07:52] DEBUG src/display.c:480: [displayShowMessageDialog] - timeout : 0
+[2020/04/11 15:07:52] DEBUG src/display.c:487: [displayShowMessageDialog] - line : 1
+[2020/04/11 15:07:52] DEBUG src/display.c:633: [displayShowMessageDialog] - saiu
+[2020/04/11 15:07:52] DEBUG src/CommCore.c:946: Disconnect...
+[2020/04/11 15:07:52] DEBUG src/TrxAdministrativas.c:467: ADM-COMDestroy-End
+[2020/04/11 15:07:52] DEBUG src/Config.c:162: verifica update na verostore
+[2020/04/11 15:07:52] DEBUG src/Config.c:178: verostore: seconds since last check
+[2020/04/11 15:07:52] DEBUG src/Bibcomp.c:1156: bcRemoveCard
+[2020/04/11 15:07:52] DEBUG src/Events.c:138: [event_schedule] - finish

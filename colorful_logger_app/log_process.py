@@ -1,7 +1,14 @@
 from PyQt5.QtGui import QTextDocument
 
-from colorful_logger_app import LOGGER_TAGS, logger
+from colorful_logger_app import LOGGER_TAGS
 from PyQt5.Qt import QTextBlock, QTextCursor, QTextBlockUserData
+from colorful_logger_app.constants import *
+
+__author__ = APP_AUTHOR
+__license__ = APP_LICENCE
+__version__ = APP_VERSION
+__email__ = APP_AUTHOR_EMAIL
+__status__ = APP_STATUS
 
 
 class LogUserData(QTextBlockUserData):

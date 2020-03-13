@@ -9,12 +9,19 @@ import serial
 import serial.tools.list_ports_windows
 from PyQt5.Qt import QRect, QThread, pyqtSlot, QStandardItem, QColor, QTextDocument, QRegularExpression, QTextCursor
 from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtGui import QSyntaxHighlighter, QTextCharFormat, QBrush, QFont
+from PyQt5.QtGui import QSyntaxHighlighter, QTextCharFormat, QBrush, QFont, QFocusEvent
 from PyQt5.QtWidgets import *
 from serial.serialutil import SerialException
 
 from colorful_logger_app import LOGGER_TAGS, find_tag_by_name
+from colorful_logger_app.constants import *
 from colorful_logger_app.log_process import log_filter_by_tag, log_mark_block
+
+__author__ = APP_AUTHOR
+__license__ = APP_LICENCE
+__version__ = APP_VERSION
+__email__ = APP_AUTHOR_EMAIL
+__status__ = APP_STATUS
 
 logger = logging.getLogger(__name__)
 
@@ -244,8 +251,8 @@ class FilterPanel(QWidget):
 
         self.filter_layout_2 = QHBoxLayout()
 
-        self.filter_search_button = QPushButton("Buscar")
-        self.filter_clear_button = QPushButton("Apagar")
+        self.filter_search_button = QPushButton("Search")
+        self.filter_clear_button = QPushButton("Clear")
 
         self.filter_layout_2.addWidget(self.filter_search_button)
         self.filter_layout_2.addWidget(self.filter_clear_button)
@@ -299,6 +306,14 @@ class MainWindow(QMainWindow):
         widgets needed.
      """
 
+    log_area: QPlainTextEdit
+    main_document: QTextDocument
+    serial_dialog: SerialDialog
+    serial_menu: QMenu
+    help_menu: QMenu
+    log_filter_widget: QWidget
+    log_filters: FilterPanel
+
     def __init__(self):
         super(MainWindow, self).__init__()
 
@@ -323,9 +338,6 @@ class MainWindow(QMainWindow):
         self.serial_worker = SerialListenerWorker()
         self.serial_worker.signal.connect(self.add_line_to_log_area)
 
-        self.log_area.appendPlainText("DEBUG - TESTE1")
-        self.log_area.appendPlainText("ERROR - TESTE2")
-
         self.log_area_layout = QVBoxLayout()
         self.log_area_layout.setContentsMargins(0, 0, 0, 0)
         self.log_area_layout.addWidget(self.log_area)
@@ -334,7 +346,7 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(container)
 
-        self.setWindowTitle("Beautiful Logger")
+        self.setWindowTitle(APP_NAME)
         self.setGeometry(QRect(100, 100, 800, 600))
 
     def closeEvent(self, event):
@@ -384,6 +396,7 @@ class MainWindow(QMainWindow):
         """
         tag = find_tag_by_name(msg)
         log_filter_by_tag(self.main_document, tag)
+        self.update()
 
     def serial_setup(self):
         """
@@ -405,10 +418,14 @@ class MainWindow(QMainWindow):
 
     def about_box_show(self):
         about_msg_box = QMessageBox(self)
+        about_msg_box.setGeometry(QRect(100, 100, 240, 360))
         about_msg_box.addButton(QPushButton("OK"), QMessageBox.YesRole)
-        about_msg_box.setWindowTitle("Colorful Logger")
-        about_msg_box.setText("VERSION 0.1")
-        #about_msg_box.about(self, ).show()
+        about_msg_box.setWindowTitle(APP_NAME)
+
+        about_msg_box.setText("{0}\n"
+                              "Verion : {1}\n"
+                              "Author : {2}\n"
+                              "Email : {3}".format(APP_NAME, APP_VERSION, APP_AUTHOR, APP_AUTHOR_EMAIL))
         about_msg_box.exec()
 
     @pyqtSlot(str)
@@ -432,28 +449,37 @@ class MainWindow(QMainWindow):
         """
 
         cursor: QTextCursor
-        doc : QTextDocument
-        text : str
-        format : QTextCharFormat
+        doc: QTextDocument
+        text: str
+        search_format : QTextCharFormat
 
         text = self.log_filters.filter_line.text()
         doc = self.log_area.document()
-        format = QTextCharFormat()
+
+        search_format = QTextCharFormat()
         color = QColor("yellow")
         color.setAlpha(255)
-        format.setBackground(color)
+        search_format.setBackground(color)
 
+        # remove the previous search highlight
         if not self.last_search_cursor.isNull():
             self.last_search_cursor.setCharFormat(QTextCharFormat())
 
+        # if search word changed or erased, reset cursor and last_search
         if len(text) == 0 or text != self.last_search:
             self.last_search_cursor = QTextCursor()
             self.last_search = text
+            self.log_area.unsetCursor()
+        # if has no word to search, just return
+        if len(text) == 0:
             return
 
         cursor = self.last_search_cursor if not self.last_search_cursor.isNull() else QTextCursor(doc)
         cursor = doc.find(text, cursor)
-        cursor.setCharFormat(format)
-
+        if not cursor.isNull():
+            self.log_area.setTextCursor(cursor)
+            cursor.setCharFormat(search_format)
+        else:
+            self.log_area.unsetCursor()
         self.last_search_cursor = cursor
-        logger.debug(cursor.selectedText())
+
