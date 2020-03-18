@@ -1,7 +1,7 @@
+from PyQt5.Qt import QTextBlock, QTextBlockUserData
 from PyQt5.QtGui import QTextDocument
 
 from colorful_logger_app import LOGGER_TAGS
-from PyQt5.Qt import QTextBlock, QTextCursor, QTextBlockUserData
 from colorful_logger_app.constants import *
 
 __author__ = APP_AUTHOR
@@ -48,9 +48,3 @@ def log_filter_by_tag(document: QTextDocument, tag_selected: dict):
                     block.setVisible(True)
         block = block.next()
 
-
-def log_search_document(document: QTextDocument, position: int, search_string: str):
-    cursor: QTextCursor
-    flag = QTextDocument.FindWholeWords
-    cursor_doc = QTextCursor(document)
-    cursor = document.find(search_string, cursor_doc, flag)

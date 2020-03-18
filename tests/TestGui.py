@@ -1,27 +1,37 @@
 import unittest
 
-import PyQt5.QtTest as qtest
-from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QTextDocument, QTextBlock
 from PyQt5.QtWidgets import QApplication
 
 from colorful_logger_app.logger_gui import MainWindow
+
 app = QApplication([])
+
 
 class TestLogArea(unittest.TestCase):
 
-
     def setUp(self) -> None:
         self.window = MainWindow()
-        self.window.log_area.appendPlainText("DEBUG - TESTE1")
-        self.window.log_area.appendPlainText("INFO - TESTE2")
-        self.window.log_area.appendPlainText("ERROR - TESTE3")
-        self.window.show()
+        self.n_lines = 0
+        with open("fake_logs.txt") as file:
+            for line in file.readlines():
+                self.window.log_area.appendPlainText(line.rstrip("\n"))
+                self.n_lines += 1
 
     def test_insert_text(self):
-        text = self.window.log_area.toPlainText()
-        self.assertIn("DEBUG - TESTE1", text)
-        self.assertIn("INFO - TESTE2", text)
-        self.assertIn("ERROR - TESTE3", text)
+        doc: QTextDocument
+        block: QTextBlock
+
+        new_line = "New Line"
+        lines = self.window.log_area.document().blockCount()
+        self.assertEqual(lines, self.n_lines, "Expected [{0}], find [{1}]".format(lines, self.n_lines))
+        self.window.log_area.appendPlainText(new_line)
+        lines = self.window.log_area.document().blockCount()
+        self.assertEqual(lines, self.n_lines + 1, "Expected [{0}], find [{1}]".format(lines, self.n_lines + 1))
+
+        doc = self.window.log_area.document()
+        block = doc.lastBlock()
+        self.assertIn(new_line, block.text(), "Expected [{0}], found [{1}]".format(new_line, block.text()))
 
     def test_button_clear(self):
         pass

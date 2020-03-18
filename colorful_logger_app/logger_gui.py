@@ -13,7 +13,7 @@ from PyQt5.QtGui import QSyntaxHighlighter, QTextCharFormat, QBrush, QFont, QFoc
 from PyQt5.QtWidgets import *
 from serial.serialutil import SerialException
 
-from colorful_logger_app import LOGGER_TAGS, find_tag_by_name
+from colorful_logger_app import LOGGER_TAGS, find_tag_by_name, LOGGER_TIMESTAMPS
 from colorful_logger_app.constants import *
 from colorful_logger_app.log_process import log_filter_by_tag, log_mark_block
 
@@ -49,6 +49,66 @@ class SerialListenerWorker(QThread):
             self.sleep(0)
 
 
+class HighlightOptionsDialog(QDialog):
+    def __init__(self, parent=None):
+        super(HighlightOptionsDialog, self).__init__(parent)
+
+        self.form_layout = QFormLayout(self)
+        self.form_layout.setFormAlignment(Qt.AlignLeft)
+        self.form_layout.setLabelAlignment(Qt.AlignLeft)
+        self.form_layout.setContentsMargins(2, 2, 2, 2)
+        self.setWindowTitle("Highlight Options")
+
+        check_box_layout = QHBoxLayout()
+
+        self.timestamp_check = QCheckBox("Timestamp")
+        self.timestamp_check.setChecked(False)
+        self.timestamp_check.stateChanged.connect(self.timestamp_check_change)
+
+        self.tag_check = QCheckBox("Tag")
+        self.tag_check.setChecked(True)
+
+        self.func_check = QCheckBox("Function")
+        self.func_check.setChecked(False)
+
+        self.module_source_check = QCheckBox("Module/Source")
+        self.module_source_check.setChecked(False)
+
+        check_box_layout.addWidget(self.timestamp_check, alignment=Qt.AlignLeft)
+        check_box_layout.addWidget(self.tag_check, alignment=Qt.AlignLeft)
+        check_box_layout.addWidget(self.func_check, alignment=Qt.AlignLeft)
+        check_box_layout.addWidget(self.module_source_check, alignment=Qt.AlignLeft)
+
+        highlight_label = QLabel("Highlight Options")
+
+        self.timestamp_combo = QComboBox()
+        model = self.timestamp_combo.model()
+        for timestamp in LOGGER_TIMESTAMPS:
+            item = QStandardItem(timestamp["name"])
+            model.appendRow(item)
+        self.timestamp_combo.setCurrentIndex(0)
+        self.timestamp_combo.setEnabled(self.timestamp_check.isChecked())
+
+        self.apply_button = QPushButton("Apply")
+        self.apply_button.clicked.connect(self.apply)
+
+        self.form_layout.addRow(highlight_label)
+        self.form_layout.addRow(check_box_layout)
+        self.form_layout.addRow("TimeStamp Type :", self.timestamp_combo)
+        self.form_layout.addRow(self.apply_button)
+
+    def timestamp_check_change(self):
+        checked = self.timestamp_check.isChecked()
+        self.timestamp_combo.setEnabled(checked)
+
+    def apply(self):
+        self.done(True)
+
+    def closeEvent(self, QCloseEvent):
+        super().closeEvent(QCloseEvent)
+        self.done(False)
+
+
 class SerialDialog(QDialog):
     """Create a dialog interface for connecting and disconnecting from the serial interface"""
 
@@ -61,6 +121,7 @@ class SerialDialog(QDialog):
         self.form_layout.setFormAlignment(Qt.AlignLeft)
         self.form_layout.setLabelAlignment(Qt.AlignLeft)
         self.form_layout.setContentsMargins(2, 2, 2, 2)
+        self.setWindowTitle("Serial Configuration")
 
         # TODO more ports
         # TODO unix port sintax
@@ -78,7 +139,7 @@ class SerialDialog(QDialog):
 
         port_label = QLabel("Porta :")
         logger.debug("Listing ports")
-        ports = ["COM" + str(i) for i in range(0,11)]
+        ports = ["COM" + str(i) for i in range(0, 11)]
         self.ports_combo = QComboBox()
         model = self.ports_combo.model()
         for port in ports:
@@ -186,7 +247,7 @@ class SerialDialog(QDialog):
             if self.serial_handler.isOpen():
                 if self.serial_handler.isOpen():
                     self.enable_all_widgets(False)
-                self.message_box.appendPlainText("Connection Sucess")
+                self.message_box.appendPlainText("Connection Success")
                 self.connect_button.setEnabled(False)
                 self.disconnect_button.setEnabled(True)
             else:
@@ -272,18 +333,27 @@ class HighlighterTag(QSyntaxHighlighter):
         See colorful_logger_app.LOGGER_TAGS
     """
 
-    def __init__(self, parent):
+    def __init__(self, parent, tag_rules=None, timestamp_rules=None, function_rule=None, module_source_rule=None):
         super(HighlighterTag, self).__init__(parent)
 
+        self.function_rule = function_rule
+        self.tag_rules = tag_rules
+        self.timestamp_rules = timestamp_rules
+        self.module_source_rule = module_source_rule
+
         self.highlight_rules = []
-        for tag in LOGGER_TAGS:
-            font = QFont()
-            font.setBold(True)
-            format_text = QTextCharFormat()
-            format_text.setFont(font)
-            format_text.setForeground(QBrush(QColor(tag["color"])))
-            format_text.setFontUnderline(True)
-            self.highlight_rules += [(QRegularExpression(tag["name"]), format_text)]
+        if not self.tag_rules:
+            for tag in LOGGER_TAGS:  # Tag rules
+                font = QFont()
+                font.setBold(True)
+                format_text = QTextCharFormat()
+                format_text.setFont(font)
+                format_text.setForeground(QBrush(QColor(tag["color"])))
+                format_text.setFontUnderline(True)
+                self.highlight_rules += [(QRegularExpression(tag["name"]), format_text)]
+         # if not self.timestamp_rules:
+         #     self.highlight_rules.append(self.timestamp_rules)
+
 
     def highlightBlock(self, p_str):
         if len(p_str) == 0:
@@ -317,13 +387,15 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
 
-        self.log_area = None                # :type QPlainTextEdit
-        self.main_document = None           # :type QTextDocument
-        self.serial_dialog = None           # :type SerialDialog
-        self.serial_menu = None             # :type QMenu
-        self.help_menu = None               # :type QMenu
-        self.log_filter_widget = None       # :type QWidget
-        self.log_filters = None             # :type FilterPanel
+        self.log_area = None  # :type QPlainTextEdit
+        self.main_document = None  # :type QTextDocument
+        self.highlight_options_dialog = None  # :type HighlightOptionsDialog
+        self.serial_dialog = None  # :type SerialDialog
+        self.serial_menu = None  # :type QMenu
+        self.highlight_options_menu = None  # :type QMenu
+        self.help_menu = None  # :type QMenu
+        self.log_filter_widget = None  # :type QWidget
+        self.log_filters = None  # :type FilterPanel
         self.last_search = str()
         self.last_search_cursor = QTextCursor()
 
@@ -332,6 +404,7 @@ class MainWindow(QMainWindow):
         self.setup_text_area()
         self.setup_footer_panel()
         self.setup_serial_dialog()
+        self.setup_highlight_options_dialog()
 
         self.first_search_flag = False
 
@@ -357,14 +430,23 @@ class MainWindow(QMainWindow):
         """Setup the Serial Dialog interface"""
         self.serial_dialog = SerialDialog(self)
 
+    def setup_highlight_options_dialog(self):
+        """Setup the highlighting options dialog interface"""
+        self.highlight_options_dialog = HighlightOptionsDialog(self)
+
     def setup_menu(self):
         """Setup the menu"""
         self.serial_menu = self.menuBar().addMenu("Serial")
+        self.highlight_options_menu = self.menuBar().addMenu("Highlight Options")
         self.help_menu = self.menuBar().addMenu("Help")
 
         action_serial_setup = QAction("Setup", self)
         action_serial_setup.triggered.connect(self.serial_setup)
         self.serial_menu.addAction(action_serial_setup)
+
+        action_highlight_options = QAction("Highlight Options", self)
+        action_highlight_options.triggered.connect(self.highlight_options_setup)
+        self.highlight_options_menu.addAction(action_highlight_options)
 
         action_about_box = QAction("About", self)
         action_about_box.triggered.connect(self.about_box_show)
@@ -397,6 +479,9 @@ class MainWindow(QMainWindow):
         tag = find_tag_by_name(msg)
         log_filter_by_tag(self.main_document, tag)
         self.update()
+
+    def highlight_options_setup(self):
+        apply = self.highlight_options_dialog.exec()
 
     def serial_setup(self):
         """
@@ -451,7 +536,7 @@ class MainWindow(QMainWindow):
         cursor: QTextCursor
         doc: QTextDocument
         text: str
-        search_format : QTextCharFormat
+        search_format: QTextCharFormat
 
         text = self.log_filters.filter_line.text()
         doc = self.log_area.document()
@@ -482,4 +567,3 @@ class MainWindow(QMainWindow):
         else:
             self.log_area.unsetCursor()
         self.last_search_cursor = cursor
-
